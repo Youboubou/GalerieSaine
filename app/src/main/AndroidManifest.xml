@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+    ╔════════════════════════════════════════════════════════════════╗
+    ║  IMPORTANT : AUCUNE PERMISSION INTERNET DÉCLARÉE ICI           ║
+    ║  L'app est TECHNIQUEMENT incapable d'envoyer des données       ║
+    ║  à quelque serveur que ce soit.                                ║
+    ╚════════════════════════════════════════════════════════════════╝
+    -->
+
+    <!-- Permission pour lire les photos sur Android 13+ (API 33+) -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+
+    <!-- Permission pour les anciens Android (12 et moins) -->
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
+    <!-- Permission pour l'accès partiel aux photos (Android 14+) -->
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
+
+    <application
+        android:name=".GalerieApplication"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.GalerieSaine"
+        android:usesCleartextTraffic="false"
+        tools:targetApi="31">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden"
+            android:theme="@style/Theme.GalerieSaine">
+            <!-- Lancement classique depuis le tiroir d'applications -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!--
+                ╔════════════════════════════════════════════════════════╗
+                ║  L'app peut être choisie comme galerie par défaut      ║
+                ║  pour visualiser les photos du téléphone.              ║
+                ╚════════════════════════════════════════════════════════╝
+            -->
+
+            <!-- Ouverture d'une image (ACTION_VIEW) depuis une autre app -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+
+            <!-- Affichage du contenu d'un dossier d'images -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.dir/image" />
+            </intent-filter>
+
+            <!-- Rôle "galerie par défaut" du téléphone -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.APP_GALLERY" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
