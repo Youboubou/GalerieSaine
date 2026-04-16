@@ -50,7 +50,7 @@ Une application Android de galerie photo **100% privée**, **sans publicité**, 
 Si tu préfères vérifier le code et compiler toi-même :
 
 ```bash
-git clone https://github.com/TON_UTILISATEUR/GalerieSaine.git
+git clone https://github.com/Youboubou/GalerieSaine.git
 cd GalerieSaine
 ```
 
